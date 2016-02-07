@@ -52,8 +52,6 @@ for commit_index in range(len(log_as_json)):
     for f in commit['files']:
         log_csv[f][commit_index]=1
 
-print(log_csv)
-
 recommender = client.Recommender("127.0.0.1", 9199, "my_recommender")
 
 for filename,cmts in log_csv.items():
@@ -62,10 +60,6 @@ for filename,cmts in log_csv.items():
         d.update([(commits[i], cmts[i])])
     recommender.update_row(filename, Datum(d))
 
-"""
-f = open('log_as.csv', 'w')
-writer = csv.writer(f)
-
-writer.writerows([['#'] + commits] + [[k] + v for k,v in log_csv.items()])
-f.close()
-"""
+for f in files:
+    r = [x.id for x in recommender.similar_row_from_id(f, 4)]
+    print(r[0] + ' -> ' + ', '.join(r[1:]))
