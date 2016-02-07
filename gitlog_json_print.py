@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import subprocess, json, re, csv, sys
+import subprocess, json, re, csv, sys, functools
 from jubatus.recommender import client
 from jubatus.recommender import types
 from jubatus.common import Datum
-
 
 def partial_commit_json():
     dump =subprocess.check_output( ['git', 'log', '--pretty=format:{%n  \"commit\": \"%H\",%n  \"author\": \"%an <%ae>\",%n  \"date\": \"%ad\",%n  \"message\": \"%f\"%n},'] ).decode('UTF-8')
@@ -24,28 +23,16 @@ def merge(j, f):
 def get_log_as_json():
     return list(map(merge, partial_commit_json(), update_files_per_revision()))
 
-# print(get_log_as_json())
-
 log_as_json = get_log_as_json()
 
-commits=[]
-for revision in log_as_json:
-    commits.append(revision['commit'])
+commits=[revision['commit'] for revision in log_as_json]
 
-files=set()
-for f in log_as_json:
-    files.update(f['files'])
-files = list(files)
+files=list(functools.reduce(lambda acc,e: acc.union(e['files']), log_as_json,set()))
 
-# print(commits)
-# print(files)
 
 log_csv={}
 for f in files:
     log_csv.update([(f, [0 for x in range(len(commits))])])
-
-# print(log_csv)
-
 
 for commit_index in range(len(log_as_json)):
     commit = log_as_json[commit_index]
