@@ -5,6 +5,11 @@ import subprocess
 import json
 import re
 import csv
+import sys
+from jubatus.recommender import client
+from jubatus.recommender import types
+from jubatus.common import Datum
+
 
 def partial_commit_json():
     dump =subprocess.check_output( ['git', 'log', '--pretty=format:{%n  \"commit\": \"%H\",%n  \"author\": \"%an <%ae>\",%n  \"date\": \"%ad\",%n  \"message\": \"%f\"%n},'] ).decode('UTF-8')
@@ -53,8 +58,16 @@ for commit_index in range(len(log_as_json)):
 
 print(log_csv)
 
+for filename,cmts in log_csv.items():
+    d={}
+    for i in range(len(cmts)):
+        d.update([(commits[i], cmts[i])])
+    print(d)
+
+"""
 f = open('log_as.csv', 'w')
 writer = csv.writer(f)
 
 writer.writerows([['#'] + commits] + [[k] + v for k,v in log_csv.items()])
 f.close()
+"""
