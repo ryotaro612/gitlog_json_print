@@ -55,5 +55,6 @@ print(log_csv)
 
 f = open('log_as.csv', 'w')
 writer = csv.writer(f)
-writer.writerows([[k] + v for k,v in log_csv.items()])
+
+writer.writerows([['#'] + commits] + [[k] + v for k,v in log_csv.items()])
 f.close()
