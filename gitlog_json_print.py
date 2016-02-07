@@ -1,11 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import subprocess
-import json
-import re
-import csv
-import sys
+import subprocess, json, re, csv, sys
 from jubatus.recommender import client
 from jubatus.recommender import types
 from jubatus.common import Datum
@@ -58,11 +54,13 @@ for commit_index in range(len(log_as_json)):
 
 print(log_csv)
 
+recommender = client.Recommender("127.0.0.1", 9199, "my_recommender")
+
 for filename,cmts in log_csv.items():
     d={}
     for i in range(len(cmts)):
         d.update([(commits[i], cmts[i])])
-    print(d)
+    recommender.update_row(filename, Datum(d))
 
 """
 f = open('log_as.csv', 'w')
