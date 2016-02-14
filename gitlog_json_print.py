@@ -47,6 +47,12 @@ for filename,cmts in log_csv.items():
         d.update([(commits[i], cmts[i])])
     recommender.update_row(filename, Datum(d))
 
+relation_map={}
 for f in files:
     r = [x.id for x in recommender.similar_row_from_id(f, 4)]
-    print(r[0] + ' -> ' + ', '.join(r[1:]))
+    # print(r[0] + ' -> ' + ', '.join(r[1:]))
+    relation_map.update([(f, [x for x in r[1:]])])
+
+# print(relation_map)
+
+names=sorted(replation_map.keys())
