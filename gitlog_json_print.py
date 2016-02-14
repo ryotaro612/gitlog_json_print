@@ -54,5 +54,19 @@ for f in files:
     relation_map.update([(f, [x for x in r[1:]])])
 
 # print(relation_map)
+# [file1, file2, ll]
+sorted_names=sorted(relation_map.keys())
 
-names=sorted(replation_map.keys())
+def create_link(name):
+    def get_index_by_name(name):
+        return sorted_names.index(name)
+
+    idx=get_index_by_name(name)
+    related_indice=[get_index_by_name(n) for n in relation_map[name] if (n in sorted_names)]
+    return [{'source': idx, 'target': i, 'value': 1} for i in related_indice if i > idx]
+
+a = [create_link(n) for n in sorted_names]
+
+with open('hoge.json', 'w') as f:
+    json.dump({'nodes': [{'name': name, 'group': 1} for name in sorted_names],
+    'links': [e for aa in a for e in aa]}, f,indent=2)
