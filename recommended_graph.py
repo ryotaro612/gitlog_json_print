@@ -3,6 +3,8 @@
 
 from jubatus_handler import recommend
 
+dest='resources/main.json'
+
 def create_links(recommended):
     sorted_filenames=sorted(recommended.keys())
 
@@ -21,6 +23,6 @@ a=create_links(recommended)
 sorted_filenames = sorted(recommended.keys())
 
 import json
-with open('hoge.json', 'w') as f:
+with open(dest, 'w') as f:
     json.dump({'nodes': [{'name': name, 'group': 1} for name in sorted_filenames],
     'links': [e for aa in a for e in aa]}, f,indent=2)
