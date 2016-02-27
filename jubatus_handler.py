@@ -32,5 +32,3 @@ def recommend():
                 # print(relation_map)
                 # [file1, file2, ll]
     return recommended
-
-print(recommend())

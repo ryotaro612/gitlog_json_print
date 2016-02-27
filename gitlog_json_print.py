@@ -30,6 +30,7 @@ commits=[revision['commit'] for revision in log_as_json]
 files=list(functools.reduce(lambda acc,e: acc.union(e['files']), log_as_json,set()))
 
 log_csv={}
+# initialize the matrix(file, commit). its elements are zero.
 for f in files:
     log_csv.update([(f, [0 for x in range(len(commits))])])
 
