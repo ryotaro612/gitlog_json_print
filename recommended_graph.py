@@ -18,11 +18,14 @@ def create_links(recommended):
 
     return [create_link(n) for n in sorted_filenames]
 
-recommended = recommend()
-a=create_links(recommended)
-sorted_filenames = sorted(recommended.keys())
+if __name__ == '__main__':
+    import sys
+    recommended = recommend(sys.argv[1])
+    # print(recommended)
+    a=create_links(recommended)
+    sorted_filenames = sorted(recommended.keys())
 
-import json
-with open(dest, 'w') as f:
-    json.dump({'nodes': [{'name': name, 'group': 1} for name in sorted_filenames],
-    'links': [e for aa in a for e in aa]}, f,indent=2)
+    import json
+    with open(dest, 'w') as f:
+        json.dump({'nodes': [{'name': name, 'group': 1} for name in sorted_filenames],
+        'links': [e for aa in a for e in aa]}, f,indent=2)

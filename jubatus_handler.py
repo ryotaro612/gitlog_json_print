@@ -5,14 +5,14 @@ _host = "127.0.0.1"
 _port = 9199
 _name = "mokumoku2_recommender"
 
-def recommend():
+def recommend(path):
     from jubatus.recommender import client
     from jubatus.recommender import types
     from jubatus.common import Datum
     from commit_matrix import create_commit_matrix
     from gitlog import dump, get_files, get_commit_hashes
 
-    json_frmt_log = dump()
+    json_frmt_log = dump(path)
     mtrx=create_commit_matrix(json_frmt_log)
     commit_hashes=get_commit_hashes(json_frmt_log)
 

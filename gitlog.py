@@ -3,12 +3,12 @@
 
 import subprocess, json, re, functools
 
-def _fetch_partial_commits():
-    dump =subprocess.check_output( ['git', '--git-dir=../jubatus/.git', 'log', '--pretty=format:{%n  \"commit\": \"%H\",%n  \"author\": \"%an <%ae>\",%n  \"date\": \"%ad\",%n  \"message\": \"%f\"%n},'] ).decode('UTF-8')
+def _fetch_partial_commits(path):
+    dump =subprocess.check_output( ['git', '--git-dir='+ path, 'log', '--pretty=format:{%n  \"commit\": \"%H\",%n  \"author\": \"%an <%ae>\",%n  \"date\": \"%ad\",%n  \"message\": \"%f\"%n},'] ).decode('UTF-8')
     return json.loads("[" + dump[:-1] + "]")
 
-def _fetch_updated_files_per_revision():
-    dump =subprocess.check_output( ['git', '--git-dir=../jubatus/.git', '--no-pager', 'log', '--name-only', '--format=\'%H', '--pretty=format:'] ).decode('UTF-8')
+def _fetch_updated_files_per_revision(path):
+    dump =subprocess.check_output( ['git','--git-dir='+path, '--no-pager', 'log', '--name-only', '--format=\'%H', '--pretty=format:'] ).decode('UTF-8')
     chunk=[]
     for x in re.split('\n\n', dump):
         chunk.append([xx for xx in re.split('\n', x) if len(xx)!=0])
@@ -23,5 +23,5 @@ def get_commit_hashes(json_frmt_log):
 def get_files(json_frmt_log):
     return list(functools.reduce(lambda acc,e: acc.union(e['files']), json_frmt_log,set()))
 
-def dump():
-    return list(map(_merge, _fetch_partial_commits(), _fetch_updated_files_per_revision()))
+def dump(path):
+    return list(map(_merge, _fetch_partial_commits(path), _fetch_updated_files_per_revision(path)))
