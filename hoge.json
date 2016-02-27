@@ -1,0 +1,124 @@
+{
+  "links": [
+    {
+      "target": 1,
+      "source": 0,
+      "value": 1
+    },
+    {
+      "target": 9,
+      "source": 3,
+      "value": 1
+    },
+    {
+      "target": 7,
+      "source": 3,
+      "value": 1
+    },
+    {
+      "target": 11,
+      "source": 4,
+      "value": 1
+    },
+    {
+      "target": 7,
+      "source": 4,
+      "value": 1
+    },
+    {
+      "target": 6,
+      "source": 5,
+      "value": 1
+    },
+    {
+      "target": 8,
+      "source": 5,
+      "value": 1
+    },
+    {
+      "target": 11,
+      "source": 5,
+      "value": 1
+    },
+    {
+      "target": 11,
+      "source": 6,
+      "value": 1
+    },
+    {
+      "target": 10,
+      "source": 6,
+      "value": 1
+    },
+    {
+      "target": 9,
+      "source": 7,
+      "value": 1
+    },
+    {
+      "target": 11,
+      "source": 7,
+      "value": 1
+    },
+    {
+      "target": 11,
+      "source": 8,
+      "value": 1
+    },
+    {
+      "target": 11,
+      "source": 10,
+      "value": 1
+    }
+  ],
+  "nodes": [
+    {
+      "group": 1,
+      "name": ".gitignore"
+    },
+    {
+      "group": 1,
+      "name": "LICENSE"
+    },
+    {
+      "group": 1,
+      "name": "README.md"
+    },
+    {
+      "group": 1,
+      "name": "analyze.py"
+    },
+    {
+      "group": 1,
+      "name": "data/log_as.csv"
+    },
+    {
+      "group": 1,
+      "name": "git-log2json.sh"
+    },
+    {
+      "group": 1,
+      "name": "git-stat2json.sh"
+    },
+    {
+      "group": 1,
+      "name": "gitlog_json_print.py"
+    },
+    {
+      "group": 1,
+      "name": "gitlogjson.rb"
+    },
+    {
+      "group": 1,
+      "name": "juba_config.json"
+    },
+    {
+      "group": 1,
+      "name": "log_as.csv"
+    },
+    {
+      "group": 1,
+      "name": "update.py"
+    }
+  ]
+}
