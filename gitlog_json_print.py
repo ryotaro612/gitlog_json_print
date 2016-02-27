@@ -53,6 +53,8 @@ for f in files:
     # print(r[0] + ' -> ' + ', '.join(r[1:]))
     relation_map.update([(f, [x for x in r[1:]])])
 
+print(relation_map)
+
 # print(relation_map)
 # [file1, file2, ll]
 sorted_names=sorted(relation_map.keys())

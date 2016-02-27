@@ -27,8 +27,5 @@ def recommend(path):
 
     for f in get_files(json_frmt_log):
         r = [x.id for x in recommender.similar_row_from_id(f, 4)]
-        # print(r[0] + ' -> ' + ', '.join(r[1:]))
         recommended.update([(f, [x for x in r[1:]])])
-                # print(relation_map)
-                # [file1, file2, ll]
     return recommended
