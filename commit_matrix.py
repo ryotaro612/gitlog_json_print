@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-def create_commit_matrix():
-    from gitlog_as_json import dump
+def create_commit_matrix(revisions):
     import functools
 
-    revisions=dump()
     commit_hashes=[revision['commit'] for revision in revisions]
 
     files=list(functools.reduce(lambda acc,cmt: acc.union(cmt['files']), revisions,set()))
